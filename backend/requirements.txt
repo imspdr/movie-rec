@@ -1,0 +1,9 @@
+fastapi==0.115.0
+numpy==1.26.4
+pandas==2.2.1
+pytz==2024.2
+requests==2.32.3
+uvicorn==0.31.0
+scikit-learn==1.5.2
+bs4==0.0.2
+beautifulsoup4==4.12.3
