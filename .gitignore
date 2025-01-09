@@ -1,0 +1,10 @@
+__pycache__/
+.idea
+.venv
+venv
+.vscode
+dist
+frontend/node_modules
+frontend/build/
+frontend/package-lock.json
+!.gitkeep
