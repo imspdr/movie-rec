@@ -4,7 +4,7 @@ WORKDIR /root
 ADD requirements.txt /root
 RUN cd
 RUN pip install -r requirements.txt
-ADD api /root/api
+ADD model /root/model
 ADD main.py /root
 
 EXPOSE 8000
