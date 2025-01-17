@@ -1,39 +1,49 @@
 import axios from "axios";
-import { TimeseriesData, NewsData, StockData } from "./types";
+import { MovieSimple, Movie } from "./types";
 const BACKURL = "/back";
 
-export const predictAPI = {
-  getKospi200: async () => {
+export const moviesAPI = {
+  getMovieAll: async () => {
     const ret = await axios
-      .get(BACKURL + `/kospi200`)
+      .get(BACKURL + `/movies/all`)
       .then((data: any) => {
         return data.data;
       })
       .catch((e) => {
         return [];
       });
-    return ret as StockData[];
+    return ret as MovieSimple[];
   },
-  getNews: async (keyword: string) => {
+  postMoviesPast: async (ids: number[], index: number, length: number) => {
     const ret = await axios
-      .get(BACKURL + `/crawl_news/${keyword}`)
+      .post(BACKURL + `/movies/past/index/${index}/length/${length}`, {
+        ids: ids,
+      })
       .then((data: any) => {
         return data.data;
       })
       .catch((e) => {
-        return [];
+        return {
+          data: [],
+          index: 0,
+        };
       });
-    return ret as NewsData[];
+    return ret as {
+      data: Movie[];
+      index: number;
+    };
   },
-  getTimeseriesData: async (code: string, length: number, period: number) => {
+  postMovieNew: async (ids: number[]) => {
     const ret = await axios
-      .get(BACKURL + `/stock/${code}/length/${length}/period/${period}`)
+      .post(BACKURL + `/movies/new`, {
+        ids: ids,
+      })
       .then((data: any) => {
         return data.data;
       })
       .catch((e) => {
         return [];
       });
-    return ret as TimeseriesData;
+    return ret as Movie[];
   },
 };

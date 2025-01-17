@@ -2,15 +2,34 @@ import { observer } from "mobx-react";
 import { useRootStore } from "@src/store/RootStoreProvider";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { useState, useEffect } from "react";
-import { StyledEngineProvider, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
 import { css } from "@emotion/react";
 import { unselectable } from "@src/util";
 import ThemeToggle from "@src/components/ThemeToggle";
-import MainPage from "./MainPage";
+import ProfileDialog from "@src/components/ProfileDialog";
+import MainPage from "@src/MainPage";
 
 const lightTheme = createTheme({
   palette: {
     mode: "light",
+  },
+  components: {
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: "var(--highlight)",
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            color: "var(--highlight)",
+          },
+        },
+      },
+    },
   },
 });
 
@@ -18,13 +37,31 @@ const darkTheme = createTheme({
   palette: {
     mode: "dark",
   },
+  components: {
+    MuiTabs: {
+      styleOverrides: {
+        indicator: {
+          backgroundColor: "var(--highlight)",
+        },
+      },
+    },
+    MuiTab: {
+      styleOverrides: {
+        root: {
+          "&.Mui-selected": {
+            color: "var(--highlight)",
+          },
+        },
+      },
+    },
+  },
 });
 
 function App() {
   const rootStore = useRootStore();
   const [darkMode, setDarkMode] = useState(false);
+  const [profileOpen, setProfileOpen] = useState(false);
   const resize = () => {
-    rootStore.setHeight(window.innerHeight);
     rootStore.setWidth(window.innerWidth);
   };
   useEffect(() => {
@@ -36,7 +73,9 @@ function App() {
   }, []);
 
   useEffect(() => {
-    //rootStore.setKospi200();
+    rootStore.generateMovieList();
+    rootStore.getGivenMovieResult();
+    rootStore.getNewMovieResult();
   }, []);
 
   const toggleTheme = () => {
@@ -106,15 +145,23 @@ function App() {
             ${unselectable}
           `}
         >
-          <Typography>{"IMSPDR / stock-prediction"}</Typography>
-          <ThemeToggle onClick={toggleTheme} isDark={darkMode} />
+          <Typography>{"IMSPDR / movie-rec"}</Typography>
+          <div
+            css={css`
+              display: flex;
+              flex-direction: row;
+              gap: 20px;
+            `}
+          >
+            <ProfileDialog open={profileOpen} setOpen={setProfileOpen} />
+            <ThemeToggle onClick={toggleTheme} isDark={darkMode} />
+          </div>
         </div>
         <div
           css={css`
             position: absolute;
             top: 48px;
             width: 100%;
-            height: calc(${rootStore.height} - 48px);
             ${unselectable}
           `}
         >
