@@ -7,6 +7,7 @@ export default function MovieCard(props: { movie: Movie; width: number; onClick:
   const [hover, setHover] = useState(false);
   return (
     <div
+      key={`${props.movie.id}`}
       css={css`
         display: flex;
         flex-direction: column;

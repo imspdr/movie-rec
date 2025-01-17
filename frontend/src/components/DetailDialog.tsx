@@ -74,6 +74,7 @@ export default function DetailDialog(props: {
       onClose={props.onClose}
       css={css`
         & .MuiDialog-paper {
+          background-color: var(--paper);
           margin: 10px;
           width: ${props.width}px;
         }

@@ -12,6 +12,8 @@ export class RootStore {
   nowIndex: number;
   selectedMovie: Movie | undefined;
 
+  loading: boolean;
+
   constructor() {
     this.width = 800;
     this.favoriteMovies = [];
@@ -19,6 +21,8 @@ export class RootStore {
     this.newMovieList = [];
     this.moviePool = [];
     this.nowIndex = 0;
+
+    this.loading = false;
     makeAutoObservable(this);
   }
 
@@ -32,6 +36,9 @@ export class RootStore {
     runInAction(() => {
       this.favoriteMovies = movies;
       this.nowIndex = 0;
+
+      this.givenMovieList = [];
+      this.newMovieList = [];
     });
     this.getGivenMovieResult();
     this.getNewMovieResult();
@@ -59,17 +66,28 @@ export class RootStore {
       this.newMovieList = movies;
     });
   };
+
   getGivenMovieResult = async () => {
+    if (this.loading) return false;
+    runInAction(() => {
+      this.loading = true;
+    });
     const res = await moviesAPI.postMoviesPast(
       this.favoriteMovies.map((movie) => movie.id),
       this.nowIndex,
-      24
+      30
     );
     const movies = res.data;
-
     runInAction(() => {
       this.givenMovieList = [...this.givenMovieList, ...movies];
       this.nowIndex = res.index;
+      this.loading = false;
+    });
+    return true;
+  };
+  deletePrevMovies = () => {
+    runInAction(() => {
+      this.givenMovieList = this.givenMovieList.slice(-150);
     });
   };
 }
