@@ -59,7 +59,7 @@ const darkTheme = createTheme({
 
 function App() {
   const rootStore = useRootStore();
-  const [darkMode, setDarkMode] = useState(false);
+  const [darkMode, setDarkMode] = useState(true);
   const [profileOpen, setProfileOpen] = useState(false);
   const resize = () => {
     rootStore.setWidth(window.innerWidth);

@@ -20,16 +20,16 @@
   --dark-grid: #4f4f4f;
   --scroll-color-white: rgba(255, 255, 255, 0.3);
   
-  --scroll-color: var(--scroll-color-black);
-  --background: var(--light);
-  --foreground: var(--black);
-  --chart-red: var(--red);
-  --chart-blue: var(--blue);
-  --chart-gray: var(--gray);
-  --chart-grid: var(--grid);
-  --paper: var(--white);
-  --highlight: var(--mint);
-  --warning: var(--pink);
+  --scroll-color: var(--scroll-color-white);
+  --background: var(--dark-black);
+  --foreground: var(--dark-white);
+  --chart-red: var(--dark-red);
+  --chart-blue: var(--dark-blue);
+  --chart-gray: var(--dark-gray);
+  --chart-grid: var(--dark-grid);
+  --paper: var(--black);
+  --highlight: var(--dark-mint);
+  --warning: var(--dark-pink);
 }
 
 html {

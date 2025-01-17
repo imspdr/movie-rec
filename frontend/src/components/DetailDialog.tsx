@@ -37,7 +37,7 @@ function RatingBox(props: { rating: number }) {
           color: var(--foreground);
         `}
       >
-        {props.rating}%
+        {props.rating}
       </Box>
     </Box>
   );
