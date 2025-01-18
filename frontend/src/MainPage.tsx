@@ -3,8 +3,8 @@ import { observer } from "mobx-react";
 import { useRootStore } from "@src/store/RootStoreProvider";
 import MovieCard from "./components/MovieCard";
 import DetailDialog from "./components/DetailDialog";
-import { Divider, Typography, Tabs, Tab } from "@mui/material";
-import { useState, useRef, useCallback, useEffect } from "react";
+import { Tabs, Tab, Button } from "@mui/material";
+import { useState, useRef } from "react";
 
 function MainPage() {
   const rootStore = useRootStore();
@@ -22,8 +22,10 @@ function MainPage() {
     flex-direction: row;
     overflow: auto;
     height: calc(100vh - 120px);
+    max-width: 1000px;
     gap: 10px;
     flex-wrap: wrap;
+    align-content: flex-start;
   `;
 
   const onScroll = async () => {
@@ -94,6 +96,19 @@ function MainPage() {
                 }}
               />
             ))}
+            <Button
+              onClick={() => {
+                rootStore.getGivenMovieResult();
+              }}
+              css={css`
+                color: var(--highlight);
+                display: flex;
+                justify-self: center;
+                width: 100%;
+              `}
+            >
+              {"더 불러오기"}
+            </Button>
           </div>
         )}
       </div>
