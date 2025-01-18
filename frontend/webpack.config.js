@@ -72,7 +72,7 @@ module.exports = (env) => {
         port: 4545,
         proxy: [{
           context: ["/back"],
-          target: "http://localhost:8000",
+          target: "http://localhost:8001",
           pathRewrite: { "^/back": "" },
           logLevel: "info"
         }],

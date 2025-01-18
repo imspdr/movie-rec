@@ -64,18 +64,17 @@ function App() {
   const resize = () => {
     rootStore.setWidth(window.innerWidth);
   };
-  useEffect(() => {
-    resize();
-    addEventListener("resize", resize);
-    return () => {
-      removeEventListener("resize", resize);
-    };
-  }, []);
 
   useEffect(() => {
     rootStore.generateMovieList();
     rootStore.getGivenMovieResult();
     rootStore.getNewMovieResult();
+
+    resize();
+    addEventListener("resize", resize);
+    return () => {
+      removeEventListener("resize", resize);
+    };
   }, []);
 
   const toggleTheme = () => {

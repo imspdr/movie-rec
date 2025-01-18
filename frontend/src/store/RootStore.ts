@@ -15,7 +15,7 @@ export class RootStore {
   loading: boolean;
 
   constructor() {
-    this.width = 800;
+    this.width = 300;
     this.favoriteMovies = [];
     this.givenMovieList = [];
     this.newMovieList = [];

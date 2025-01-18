@@ -5,7 +5,6 @@ import MovieCard from "./components/MovieCard";
 import DetailDialog from "./components/DetailDialog";
 import { Divider, Typography, Tabs, Tab } from "@mui/material";
 import { useState, useRef, useCallback, useEffect } from "react";
-import sample from "./movieSample.json";
 
 function MainPage() {
   const rootStore = useRootStore();
@@ -15,7 +14,6 @@ function MainPage() {
 
   const [tab, setTab] = useState(0);
   const [openDetail, setOpenDetail] = useState(false);
-  const [getNew, setGetNew] = useState(false);
 
   const scrollRef = useRef<HTMLDivElement>(null);
 
@@ -25,7 +23,6 @@ function MainPage() {
     overflow: auto;
     height: calc(100vh - 120px);
     gap: 10px;
-    width: ${(cardWidth + 20) * nCol - 5}px;
     flex-wrap: wrap;
   `;
 
@@ -45,12 +42,6 @@ function MainPage() {
     }
   };
 
-  useEffect(() => {
-    if (getNew) {
-      rootStore.getGivenMovieResult();
-    }
-  }, [getNew]);
-
   return (
     <>
       {openDetail && rootStore.selectedMovie && (
@@ -68,7 +59,7 @@ function MainPage() {
         css={css`
           display: flex;
           flex-direction: column;
-          width: ${rootStore.width - 5}px;
+          width: 100%;
           align-items: center;
           gap: 10px;
         `}
