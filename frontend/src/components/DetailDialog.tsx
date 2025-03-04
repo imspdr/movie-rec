@@ -67,6 +67,7 @@ export default function DetailDialog(props: {
       showinfo: 0,
       disablekb: 1,
     },
+    height: `${Math.round(props.width / 1.6)}px`,
   };
   return (
     <Dialog
@@ -89,7 +90,7 @@ export default function DetailDialog(props: {
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            height: ${Math.round(props.width / 2)}px;
+            height: ${Math.round(props.width / 1.6)}px;
           `}
         >
           {"no trailer"}
